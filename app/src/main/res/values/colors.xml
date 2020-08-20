@@ -17,18 +17,18 @@
     <color name="default_background">#000</color>
 
     <!-- configuration for album set page -->
-    <color name="albumset_background">#1A1A1A</color>
+    <color name="albumset_background">#dddddd</color>
     <color name="albumset_placeholder">#333</color>
     <color name="albumset_label_background">#EE414143</color>
     <color name="albumset_label_title">#FBFBFB</color>
     <color name="albumset_label_count">#A9ABAD</color>
 
     <!-- configuration for album page -->
-    <color name="album_background">#1A1A1A</color>
+    <color name="album_background">#dddddd</color> <!--#1A1A1A-->
     <color name="album_placeholder">#333</color>
 
     <!-- configuration for photo page -->
-    <color name="photo_background">#1A1A1A</color>
+    <color name="photo_background">#dddddd</color><!--#1A1A1A-->
     <color name="photo_placeholder">#333</color>
 
     <!-- configuration for manage cache page -->
@@ -69,5 +69,10 @@
     <color name="face_detect_success">#8050d060</color>
     <color name="face_detect_fail">#80d05060</color>
     <color name="gray">#FFAAAAAA</color>
+
+    <!-- configuration for bottom control bar in photo page -->
+    <color name="bottom_control_bar_background">#66ffffff</color>
+    <color name="bottom_control_bar_icon_color">#ff333333</color>
+    <color name="bottom_control_bar_text_color">#ff333333</color>
 
 </resources>

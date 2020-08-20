@@ -126,9 +126,23 @@
     <dimen name="albumset_icon_size">25dp</dimen>
 
     <!-- configuration for album page -->
-    <integer name="album_rows_land">2</integer>
-    <integer name="album_rows_port">4</integer>
-    <dimen name="album_slot_gap">5dp</dimen>
+    <integer name="album_rows_land">3</integer>
+    <integer name="album_rows_port">6</integer>
+    <integer name="album_columns_land">3</integer>
+    <integer name="album_columns_port">3</integer>
+    <dimen name="album_slot_gap">1dp</dimen>
+
+    <integer name="album_rows_land_small">5</integer>
+    <integer name="album_rows_port_small">8</integer>
+    <integer name="album_columns_land_small">3</integer>
+    <integer name="album_columns_port_small">6</integer>
+    <dimen name="album_slot_gap_small">0dp</dimen>
+
+    <integer name="album_rows_land_tiny">8</integer>
+    <integer name="album_rows_port_tiny">16</integer>
+    <integer name="album_columns_land_tiny">3</integer>
+    <integer name="album_columns_port_tiny">12</integer>
+    <dimen name="album_slot_gap_tiny">0dp</dimen>
 
     <!-- configuration for manage page -->
     <dimen name="cache_pin_size">24dp</dimen>
@@ -152,4 +166,13 @@
     <dimen name="photoeditor_text_padding">10dp</dimen>
     <dimen name="photoeditor_original_text_size">18dp</dimen>
     <dimen name="photoeditor_original_text_margin">4dp</dimen>
+
+    <!-- configuration for bottom control bar in photo page -->
+    <dimen name="bottom_control_bar_icon_width">20dp</dimen>
+    <dimen name="bottom_control_bar_icon_height">20dp</dimen>
+    <dimen name="bottom_control_bar_text_size">10dp</dimen>
+
+
+
+
 </resources>

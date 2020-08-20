@@ -23,7 +23,7 @@ import com.android.gallery3d.R;
 import com.android.gallery3d.ui.AlbumSetSlotRenderer;
 import com.android.gallery3d.ui.SlotView;
 
-final class Config {
+public final class Config {
     public static class AlbumSetPage {
         private static AlbumSetPage sInstance;
 
@@ -48,6 +48,8 @@ final class Config {
             slotViewSpec = new SlotView.Spec();
             slotViewSpec.rowsLand = r.getInteger(R.integer.albumset_rows_land);
             slotViewSpec.rowsPort = r.getInteger(R.integer.albumset_rows_port);
+            slotViewSpec.columnsLand = r.getInteger(R.integer.album_columns_land);
+            slotViewSpec.columnsPort = r.getInteger(R.integer.album_columns_port);
             slotViewSpec.slotGap = r.getDimensionPixelSize(R.dimen.albumset_slot_gap);
             slotViewSpec.slotHeightAdditional = 0;
 
@@ -81,10 +83,13 @@ final class Config {
     public static class AlbumPage {
         private static AlbumPage sInstance;
 
+        private static Context sContext;
+
         public SlotView.Spec slotViewSpec;
         public int placeholderColor;
 
         public static synchronized AlbumPage get(Context context) {
+            sContext = context;
             if (sInstance == null) {
                 sInstance = new AlbumPage(context);
             }
@@ -99,8 +104,38 @@ final class Config {
             slotViewSpec = new SlotView.Spec();
             slotViewSpec.rowsLand = r.getInteger(R.integer.album_rows_land);
             slotViewSpec.rowsPort = r.getInteger(R.integer.album_rows_port);
+            slotViewSpec.columnsLand = r.getInteger(R.integer.album_columns_land);
+            slotViewSpec.columnsPort = r.getInteger(R.integer.album_columns_port);
             slotViewSpec.slotGap = r.getDimensionPixelSize(R.dimen.album_slot_gap);
         }
+
+        public void updateAlbumPageSpec(int type){
+            Resources r = sContext.getResources();
+            switch (type){
+                case 0:
+                    slotViewSpec.rowsLand = r.getInteger(R.integer.album_rows_land);
+                    slotViewSpec.rowsPort = r.getInteger(R.integer.album_rows_port);
+                    slotViewSpec.columnsLand = r.getInteger(R.integer.album_columns_land);
+                    slotViewSpec.columnsPort = r.getInteger(R.integer.album_columns_port);
+                    slotViewSpec.slotGap = r.getDimensionPixelSize(R.dimen.album_slot_gap);
+                    break;
+                case 1:
+                    slotViewSpec.rowsLand = r.getInteger(R.integer.album_rows_land_small);
+                    slotViewSpec.rowsPort = r.getInteger(R.integer.album_rows_port_small);
+                    slotViewSpec.columnsLand = r.getInteger(R.integer.album_columns_land_small);
+                    slotViewSpec.columnsPort = r.getInteger(R.integer.album_columns_port_small);
+                    slotViewSpec.slotGap = r.getDimensionPixelSize(R.dimen.album_slot_gap_small);
+                    break;
+                case 2:
+                    slotViewSpec.rowsLand = r.getInteger(R.integer.album_rows_land_tiny);
+                    slotViewSpec.rowsPort = r.getInteger(R.integer.album_rows_port_tiny);
+                    slotViewSpec.columnsLand = r.getInteger(R.integer.album_columns_land_tiny);
+                    slotViewSpec.columnsPort = r.getInteger(R.integer.album_columns_port_tiny);
+                    slotViewSpec.slotGap = r.getDimensionPixelSize(R.dimen.album_slot_gap_tiny);
+                    break;
+            }
+        }
+
     }
 
     public static class ManageCachePage extends AlbumSetPage {

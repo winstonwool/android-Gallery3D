@@ -30,4 +30,10 @@
     <!-- configuration for album page -->
     <integer name="album_rows_land">3</integer>
     <integer name="album_rows_port">5</integer>
+
+    <integer name="album_rows_land_small">4</integer>
+    <integer name="album_rows_port_small">8</integer>
+
+    <integer name="album_rows_land_tiny">6</integer>
+    <integer name="album_rows_port_tiny">10</integer>
 </resources>

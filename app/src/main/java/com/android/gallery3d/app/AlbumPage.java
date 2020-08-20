@@ -46,6 +46,7 @@ import com.android.gallery3d.glrenderer.GLCanvas;
 import com.android.gallery3d.ui.ActionModeHandler;
 import com.android.gallery3d.ui.ActionModeHandler.ActionModeListener;
 import com.android.gallery3d.ui.AlbumSlotRenderer;
+import com.android.gallery3d.ui.AlbumSlotView;
 import com.android.gallery3d.ui.DetailsHelper;
 import com.android.gallery3d.ui.DetailsHelper.CloseListener;
 import com.android.gallery3d.ui.GLRoot;
@@ -86,7 +87,7 @@ public class AlbumPage extends ActivityState implements GalleryActionBar.Cluster
     private AlbumSlotRenderer mAlbumView;
     private Path mMediaSetPath;
     private String mParentMediaSetString;
-    private SlotView mSlotView;
+    private AlbumSlotView mSlotView;
 
     private AlbumDataLoader mAlbumDataAdapter;
 
@@ -422,6 +423,8 @@ public class AlbumPage extends ActivityState implements GalleryActionBar.Cluster
         mLoadingFailed = false;
         mAlbumDataAdapter.resume();
 
+        mSlotView.resume();
+
         mAlbumView.resume();
         mAlbumView.setPressedIndex(-1);
         mActionModeHandler.resume();
@@ -469,7 +472,7 @@ public class AlbumPage extends ActivityState implements GalleryActionBar.Cluster
         mSelectionManager = new SelectionManager(mActivity, false);
         mSelectionManager.setSelectionListener(this);
         Config.AlbumPage config = Config.AlbumPage.get(mActivity);
-        mSlotView = new SlotView(mActivity, config.slotViewSpec);
+        mSlotView = new AlbumSlotView(mActivity, config.slotViewSpec);
         mAlbumView = new AlbumSlotRenderer(mActivity, mSlotView,
                 mSelectionManager, config.placeholderColor);
         mSlotView.setSlotRenderer(mAlbumView);

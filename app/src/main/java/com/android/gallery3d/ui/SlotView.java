@@ -16,6 +16,7 @@
 
 package com.android.gallery3d.ui;
 
+import android.app.Activity;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.view.GestureDetector;
@@ -31,7 +32,7 @@ public class SlotView extends GLView {
     @SuppressWarnings("unused")
     private static final String TAG = "SlotView";
 
-    private static final boolean WIDE = true;
+    private static final boolean WIDE = false;
     private static final int INDEX_NONE = -1;
 
     public static final int RENDER_MORE_PASS = 1;
@@ -69,7 +70,7 @@ public class SlotView extends GLView {
 
     private boolean mMoreAnimation = false;
     private SlotAnimation mAnimation = null;
-    private final Layout mLayout = new Layout();
+    public final Layout mLayout = new Layout();
     private int mStartIndex = INDEX_NONE;
 
     // whether the down action happened while the view is scrolling.
@@ -88,11 +89,14 @@ public class SlotView extends GLView {
     // to prevent allocating memory
     private final Rect mTempRect = new Rect();
 
+    public Activity mActivity;
+
     public SlotView(AbstractGalleryActivity activity, Spec spec) {
         mGestureDetector = new GestureDetector(activity, new MyGestureListener());
         mScroller = new ScrollerHelper(activity);
         mHandler = new SynchronizedHandler(activity.getGLRoot());
         setSlotSpec(spec);
+        mActivity = activity;
     }
 
     public void setSlotRenderer(SlotRenderer slotDrawer) {
@@ -389,6 +393,8 @@ public class SlotView extends GLView {
 
         public int rowsLand = -1;
         public int rowsPort = -1;
+        public int columnsPort = -1;
+        public int columnsLand = -1;
         public int slotGap = -1;
     }
 
@@ -402,7 +408,7 @@ public class SlotView extends GLView {
         private int mSlotHeight;
         private int mSlotGap;
 
-        private Spec mSpec;
+        public Spec mSpec;
 
         private int mWidth;
         private int mHeight;
@@ -491,17 +497,25 @@ public class SlotView extends GLView {
             padding[1] = Math.max(0, (majorLength - mContentLength) / 2);
         }
 
-        private void initLayoutParameters() {
+        public void initLayoutParameters() {
             // Initialize mSlotWidth and mSlotHeight from mSpec
             if (mSpec.slotWidth != -1) {
                 mSlotGap = 0;
                 mSlotWidth = mSpec.slotWidth;
                 mSlotHeight = mSpec.slotHeight;
             } else {
-                int rows = (mWidth > mHeight) ? mSpec.rowsLand : mSpec.rowsPort;
-                mSlotGap = mSpec.slotGap;
-                mSlotHeight = Math.max(1, (mHeight - (rows - 1) * mSlotGap) / rows);
-                mSlotWidth = mSlotHeight - mSpec.slotHeightAdditional;
+                if (WIDE) {
+                    int rows = (mWidth > mHeight) ? mSpec.rowsLand : mSpec.rowsPort;
+                    mSlotGap = mSpec.slotGap;
+                    mSlotHeight = Math.max(1, (mHeight - (rows - 1) * mSlotGap) / rows);
+                    mSlotWidth = mSlotHeight - mSpec.slotHeightAdditional;
+                } else {
+                    int columns = (mWidth > mHeight) ? mSpec.columnsLand : mSpec.columnsPort;
+                    mSlotGap = mSpec.slotGap;
+                    mSlotWidth = Math.max(1, (mWidth - (columns - 1) * mSlotGap) / columns);
+                    mSlotHeight = mSlotWidth - mSpec.slotHeightAdditional;
+                }
+
             }
 
             if (mRenderer != null) {

@@ -1,50 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/photopage_bottom_controls"
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/photopage_bottom_controls"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:layout_alignParentBottom="true"
+    android:background="@color/bottom_control_bar_background"
+    android:orientation="horizontal"
+    android:visibility="gone">
+
+    <LinearLayout
+        android:id="@+id/photopage_bottom_control_edit"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="@dimen/bottom_control_bar_icon_width"
+            android:layout_height="@dimen/bottom_control_bar_icon_height"
+            android:src="@drawable/ic_menu_edit_holo_dark"
+            android:tint="@color/bottom_control_bar_icon_color"
+            android:visibility="visible" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="编辑"
+            android:textColor="@color/bottom_control_bar_text_color"
+            android:textSize="@dimen/bottom_control_bar_text_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/photopage_bottom_control_share"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="@dimen/bottom_control_bar_icon_width"
+            android:layout_height="@dimen/bottom_control_bar_icon_height"
+            android:src="@drawable/ic_menu_share_holo_light"
+            android:tint="@color/bottom_control_bar_icon_color"
+            android:visibility="visible" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="分享"
+            android:textColor="@color/bottom_control_bar_text_color"
+            android:textSize="@dimen/bottom_control_bar_text_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/photopage_bottom_control_delete"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="@dimen/bottom_control_bar_icon_width"
+            android:layout_height="@dimen/bottom_control_bar_icon_height"
+            android:src="@drawable/ic_menu_delete"
+
+            android:visibility="visible" /><!--            android:tint="@color/bottom_control_bar_icon_color"-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="删除"
+            android:textColor="@color/bottom_control_bar_text_color"
+            android:textSize="@dimen/bottom_control_bar_text_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/photopage_bottom_control_favorite"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="@dimen/bottom_control_bar_icon_width"
+            android:layout_height="@dimen/bottom_control_bar_icon_height"
+            android:src="@drawable/ic_menu_favorite"
+            android:visibility="visible" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="收藏"
+            android:textColor="@color/bottom_control_bar_text_color"
+            android:textSize="@dimen/bottom_control_bar_text_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/photopage_bottom_control_more"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="@dimen/bottom_control_bar_icon_width"
+            android:layout_height="@dimen/bottom_control_bar_icon_height"
+            android:src="@drawable/ic_menu_more"
+            android:visibility="visible" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="更多"
+            android:textColor="@color/bottom_control_bar_text_color"
+            android:textSize="@dimen/bottom_control_bar_text_size" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/photopage_bottom_control_panorama"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:orientation="horizontal"
-        android:visibility="gone">
-        <ImageButton
-                android:id="@+id/photopage_bottom_control_edit"
-                android:src="@drawable/ic_menu_edit_holo_dark"
-                android:background="@drawable/photopage_bottom_button_background"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentBottom="true"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:visibility="gone"/>
-        <ImageButton
-                android:id="@+id/photopage_bottom_control_panorama"
-                android:src="@drawable/ic_view_photosphere"
-                android:background="@drawable/transparent_button_background"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:visibility="gone"/>
-        <ImageButton
-                android:id="@+id/photopage_bottom_control_tiny_planet"
-                android:src="@drawable/ic_menu_tiny_planet"
-                android:background="@drawable/photopage_bottom_button_background"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:visibility="gone"/>
-</RelativeLayout>
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/transparent_button_background"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        android:src="@drawable/ic_view_photosphere"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/photopage_bottom_control_tiny_planet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/photopage_bottom_button_background"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="5dp"
+        android:src="@drawable/ic_menu_tiny_planet"
+        android:visibility="gone" />
+</LinearLayout>

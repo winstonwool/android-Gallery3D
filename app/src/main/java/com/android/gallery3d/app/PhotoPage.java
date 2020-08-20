@@ -585,15 +585,20 @@ public abstract class PhotoPage extends ActivityState implements
         }
         switch(control) {
             case R.id.photopage_bottom_control_edit:
-                return mHaveImageEditor && mShowBars && !mReadOnlyView
-                        && !mPhotoView.getFilmMode()
-                        && (mCurrentPhoto.getSupportedOperations() & MediaItem.SUPPORT_EDIT) != 0
-                        && mCurrentPhoto.getMediaType() == MediaObject.MEDIA_TYPE_IMAGE;
+                return true;//TODO
+//                return mHaveImageEditor && mShowBars && !mReadOnlyView
+//                        && !mPhotoView.getFilmMode()
+//                        && (mCurrentPhoto.getSupportedOperations() & MediaItem.SUPPORT_EDIT) != 0
+//                        && mCurrentPhoto.getMediaType() == MediaObject.MEDIA_TYPE_IMAGE;
             case R.id.photopage_bottom_control_panorama:
                 return mIsPanorama;
             case R.id.photopage_bottom_control_tiny_planet:
                 return mHaveImageEditor && mShowBars
                         && mIsPanorama360 && !mPhotoView.getFilmMode();
+            case R.id.photopage_bottom_control_share:
+                return (mCurrentPhoto.getSupportedOperations() & MediaObject.SUPPORT_SHARE) != 0 ;
+            case R.id.photopage_bottom_control_delete:
+                return true;
             default:
                 return false;
         }
@@ -611,6 +616,13 @@ public abstract class PhotoPage extends ActivityState implements
                 return;
             case R.id.photopage_bottom_control_tiny_planet:
                 launchTinyPlanet();
+                return;
+            case R.id.photopage_bottom_control_share:
+                Intent shareIntent = createShareIntent(mCurrentPhoto);
+                mActivity.startActivity(Intent.createChooser(shareIntent, "share title"));
+                return;
+            case R.id.photopage_bottom_control_delete:
+                mCurrentPhoto.delete();
                 return;
             default:
                 return;
@@ -772,17 +784,22 @@ public abstract class PhotoPage extends ActivityState implements
         if (mCurrentPhoto == null) return;
 
         int supportedOperations = mCurrentPhoto.getSupportedOperations();
-        if (mReadOnlyView) {
-            supportedOperations ^= MediaObject.SUPPORT_EDIT;
-        }
-        if (mSecureAlbum != null) {
-            supportedOperations &= MediaObject.SUPPORT_DELETE;
-        } else {
-            mCurrentPhoto.getPanoramaSupport(mUpdatePanoramaMenuItemsCallback);
-            if (!mHaveImageEditor) {
-                supportedOperations &= ~MediaObject.SUPPORT_EDIT;
-            }
-        }
+//        if (mReadOnlyView) {
+//            supportedOperations ^= MediaObject.SUPPORT_EDIT;
+//        }
+//        if (mSecureAlbum != null) {
+//            supportedOperations &= MediaObject.SUPPORT_DELETE;
+//        } else {
+//            mCurrentPhoto.getPanoramaSupport(mUpdatePanoramaMenuItemsCallback);
+//            if (!mHaveImageEditor) {
+//                supportedOperations &= ~MediaObject.SUPPORT_EDIT;
+//            }
+//        }
+//        supportedOperations &= ~MediaObject.SUPPORT_SHARE;
+//        supportedOperations &= ~MediaObject.SUPPORT_EDIT;
+        supportedOperations &= 0;
+        supportedOperations |= MediaObject.SUPPORT_INFO;
+
         MenuExecutor.updateMenuOperation(menu, supportedOperations);
     }
 
@@ -946,7 +963,7 @@ public abstract class PhotoPage extends ActivityState implements
     @Override
     protected boolean onCreateActionBar(Menu menu) {
         mActionBar.createActionBarMenu(R.menu.photo, menu);
-        mHaveImageEditor = GalleryUtils.isEditorAvailable(mActivity, "image/*");
+//        mHaveImageEditor = GalleryUtils.isEditorAvailable(mActivity, "image/*");
         updateMenuOperations();
         mActionBar.setTitle(mMediaSet != null ? mMediaSet.getName() : "");
         return true;
